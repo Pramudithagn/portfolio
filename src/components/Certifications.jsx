@@ -44,21 +44,28 @@ const CertificationCard = ({
 
 const Certifications = () => {
   return (
-    <div className={`mt-12 bg-black-100 rounded-[20px]`}>
+    <div className={`mt-12 rounded-[20px]`}>
       <div
-        className={`bg-tertiary rounded-2xl ${styles.padding} min-h-[300px]`}
+        // className={`bg-tertiary rounded-2xl ${styles.padding} min-h-[300px]`}
+        className={` rounded-2xl ${styles.paddingY} min-h-[300px]`}
       >
         <motion.div variants={textVariant()}>
-          <p className={styles.sectionSubText}>My Accomplishments</p>
-          <h2 className={styles.sectionHeadText}>Certifications.</h2>
+          <p className={` ${styles.sectionSubText} text-center`}>
+            My Accomplishments
+          </p>
+          <p className={` ${styles.sectionHeadText} text-center`}>
+            Certifications.
+          </p>
         </motion.div>
       </div>
-      <div
-        className={`-mt-20 pb-14 ${styles.paddingX} flex flex-col flex-wrap gap-7`}
-      >
-        {certifications.map((certification, index) => (
-          <CertificationCard key={index} index={index} {...certification} />
-        ))}
+      <div className={`mt-5 bg-tertiary  rounded-[20px]`}>
+        <div
+          className={`-mt-20 pb-14 pt-14 ${styles.paddingX} flex flex-col flex-wrap gap-7`}
+        >
+          {certifications.map((certification, index) => (
+            <CertificationCard key={index} index={index} {...certification} />
+          ))}
+        </div>
       </div>
     </div>
   );

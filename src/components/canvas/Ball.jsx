@@ -7,10 +7,12 @@ import {
   Preload,
   useTexture,
 } from "@react-three/drei";
+import { useInView } from "react-intersection-observer";
 
 import CanvasLoader from "../Loader";
 
-const Ball = (props) => {
+// const Ball = (props) => {
+const Ball = React.memo((props) => {
   const [decal] = useTexture([props.imgUrl]);
 
   return (
@@ -35,10 +37,11 @@ const Ball = (props) => {
       </mesh>
     </Float>
   );
-};
+});
 
 const BallCanvas = ({ icon }) => {
   const canvasRef = useRef();
+  const { ref, inView } = useInView({ threshold: 0.3 });
 
   useEffect(() => {
     return () => {
@@ -50,19 +53,23 @@ const BallCanvas = ({ icon }) => {
   }, []);
 
   return (
-    <Canvas
-      ref={canvasRef}
-      frameloop="always"
-      dpr={[1, 2]}
-      gl={{ preserveDrawingBuffer: true }}
-    >
-      <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls enableZoom={false} />
-        <Ball imgUrl={icon} />
-      </Suspense>
+    <div ref={ref} style={{ width: "100%", height: "100%" }}>
+      <Canvas
+        ref={canvasRef}
+        // frameloop="always"
+        frameloop={inView ? "always" : "never"}
+        dpr={[1, 2]}
+        // gl={{ preserveDrawingBuffer: true }}
+        gl={{ preserveDrawingBuffer: true, antialias: false }}
+      >
+        <Suspense fallback={<CanvasLoader />}>
+          <OrbitControls enableZoom={false} />
+          <Ball imgUrl={icon} />
+        </Suspense>
 
-      <Preload all />
-    </Canvas>
+        <Preload all />
+      </Canvas>
+    </div>
   );
 };
 

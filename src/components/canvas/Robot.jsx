@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
+import { useInView } from "react-intersection-observer";
 
 import CanvasLoader from "../Loader";
 
@@ -32,9 +33,9 @@ const Robot = ({ isMobile }) => {
         position={[-20, 50, 10]}
         angle={0.12}
         penumbra={1}
-        intensity={1}
-        castShadow
-        shadow-mapSize={1024}
+        intensity={0.5}
+        castShadow={false}
+        // shadow-mapSize={1024}
       />
       <pointLight intensity={1} />
       <primitive
@@ -49,6 +50,11 @@ const Robot = ({ isMobile }) => {
 
 const RobotCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
+
+  const { ref, inView } = useInView({
+    triggerOnce: false,
+    threshold: 0.3,
+  });
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 500px)");
@@ -67,24 +73,30 @@ const RobotCanvas = () => {
   }, []);
 
   return (
-    <Canvas
-      frameloop="always"
-      shadows
-      dpr={[1, 2]}
-      camera={{ position: [40, 3, 5], fov: 15 }}
-      gl={{ preserveDrawingBuffer: true }}
+    <div
+      ref={ref}
+      style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
     >
-      <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls
-          enableZoom={false}
-          // maxPolarAngle={Math.PI / 2}
-          // minPolarAngle={Math.PI / 2}
-        />
-        <Robot isMobile={isMobile} />
-      </Suspense>
+      <Canvas
+        // frameloop="always"
+        frameloop={inView ? "always" : "never"}
+        shadows={false}
+        dpr={[1, 1.5]}
+        camera={{ position: [40, 3, 5], fov: 15 }}
+        gl={{ preserveDrawingBuffer: true }}
+      >
+        <Suspense fallback={<CanvasLoader />}>
+          <OrbitControls
+            enableZoom={false}
+            // maxPolarAngle={Math.PI / 2}
+            // minPolarAngle={Math.PI / 2}
+          />
+          <Robot isMobile={isMobile} />
+        </Suspense>
 
-      <Preload all />
-    </Canvas>
+        <Preload all />
+      </Canvas>
+    </div>
   );
 };
 

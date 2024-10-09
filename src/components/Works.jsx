@@ -8,6 +8,7 @@ import { projects } from "../constants";
 import { fadeIn, textVariant } from "../utils/motion";
 import Slider from "react-slick";
 import { FaPlay } from "react-icons/fa";
+import ReactPlayer from "react-player";
 
 const ProjectCard = ({
   index,
@@ -20,7 +21,7 @@ const ProjectCard = ({
   const [currentSlide, setCurrentSlide] = useState(1);
 
   const sliderSettings = {
-    dots: media.length > 1,
+    // dots: media.length > 1,
     infinite: media.length > 1,
     speed: 500,
     slidesToShow: 1,
@@ -49,6 +50,15 @@ const ProjectCard = ({
                 item.type === "video" ? (
                   <VideoWithPlayButton key={mediaIndex} videoSrc={item.url} />
                 ) : (
+                  // <div key={mediaIndex} className="relative w-full aspect-[16/9]">
+                  //   <ReactPlayer
+                  //     url={item.url}
+                  //     controls
+                  //     width="100%"
+                  //     height="100%"
+                  //     playing={false}
+                  //   />
+                  // </div>
                   // <div key={mediaIndex} className="relative max-w-[430px] max-h-[240px]">
                   <div
                     key={mediaIndex}
@@ -107,19 +117,6 @@ const ProjectCard = ({
             </p>
           ))}
         </div>
-
-        {/* <div className='mt-7 absolute inset-0 flex justify-end m-3 card-img_hover'>
-          <div
-            onClick={() => window.open(source_code_link, "_blank")}
-            className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
-          >
-            <img
-              src={github}
-              alt="source code"
-              className="w-1/2 h-1/2 object-contain"
-            />
-          </div>
-        </div> */}
       </Tilt>
     </motion.div>
   );
