@@ -7,39 +7,20 @@ import github from "./github.png";
 import menu from "./menu.svg";
 import close from "./close.svg";
 
-import css from "./tech/css.png";
 import docker from "./tech/docker.png";
-import figma from "./tech/figma.png";
 import git from "./tech/git.png";
-import html from "./tech/html.png";
 import java from "./tech/java.png";
 import javascript from "./tech/javascript.png";
 import mongodb from "./tech/mongodb.png";
 import nodejs from "./tech/nodejs.png";
 import reactjs from "./tech/reactjs.png";
-import redux from "./tech/redux.png";
-import tailwind from "./tech/tailwind.png";
 import typescript from "./tech/typescript.png";
-import threejs from "./tech/threejs.svg";
 import spring from "./tech/spring.png";
 import python from "./tech/python.png";
-import maven from "./tech/maven.png";
-import jenkins from "./tech/jenkins.png";
-import mui from "./tech/mui.png";
-import express from "./tech/express.png";
-import mysql from "./tech/mysql.png";
-import sql from "./tech/sql.png";
-import firebase from "./tech/firebase.png";
-import hibernate from "./tech/hibernate.png";
-import bootstrap from "./tech/bootstrap.png";
 import aws from "./tech/aws.png";
 import awsphoto from "./awsphoto.png";
 import jenkinsphoto from "./jenkinsphoto.png";
 
-import meta from "./company/meta.png";
-import shopify from "./company/shopify.png";
-import starbucks from "./company/starbucks.png";
-import tesla from "./company/tesla.png";
 import infor from "./company/infor.png";
 import frontwalker from "./company/frontwalker.png";
 
@@ -87,38 +68,19 @@ export {
   github,
   menu,
   close,
-  css,
   docker,
-  figma,
   git,
-  html,
   java,
   javascript,
   mongodb,
   nodejs,
   reactjs,
-  redux,
-  tailwind,
   typescript,
-  threejs,
   spring,
   python,
-  maven,
-  jenkins,
-  mui,
-  express,
-  mysql,
-  sql,
-  firebase,
-  hibernate,
-  bootstrap,
   aws,
   awsphoto,
   jenkinsphoto,
-  meta,
-  shopify,
-  starbucks,
-  tesla,
   infor,
   frontwalker,
   medify_demo,
