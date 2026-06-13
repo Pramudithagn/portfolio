@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { styles } from "../styles";
-import { navLinks } from "../constants";
+import { navLinks, socialLinks } from "../constants";
 import { logo, menu, close } from "../assets";
 
 const Navbar = () => {
@@ -62,6 +63,25 @@ const Navbar = () => {
           ))}
         </ul>
 
+        <div className="hidden sm:flex items-center gap-4">
+          <a
+            href={socialLinks.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-secondary hover:text-white transition-colors duration-200"
+          >
+            <FaGithub size={22} />
+          </a>
+          <a
+            href={socialLinks.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-secondary hover:text-white transition-colors duration-200"
+          >
+            <FaLinkedin size={22} />
+          </a>
+        </div>
+
         <div className="sm:hidden flex flex-1 justify-end items-center">
           <img
             src={toggle ? close : menu}
@@ -90,6 +110,24 @@ const Navbar = () => {
                   <a href={`#${nav.id}`}>{nav.title}</a>
                 </li>
               ))}
+              <li className="flex gap-4 pt-2">
+                <a
+                  href={socialLinks.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-secondary hover:text-white transition-colors duration-200"
+                >
+                  <FaGithub size={20} />
+                </a>
+                <a
+                  href={socialLinks.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-secondary hover:text-white transition-colors duration-200"
+                >
+                  <FaLinkedin size={20} />
+                </a>
+              </li>
             </ul>
           </div>
         </div>

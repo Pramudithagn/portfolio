@@ -9,6 +9,8 @@ import Feedbacks from "./Feedbacks";
 import Contact from "./Contact";
 import CanvasLoader from "./Loader";
 import Certifications from "./Certifications";
+import Footer from "./Footer";
+import BackToTop from "./BackToTop";
 
 export {
   Hero,
@@ -25,4 +27,6 @@ export {
   RobotCanvas,
   StarsCanvas,
   Certifications,
+  Footer,
+  BackToTop,
 };

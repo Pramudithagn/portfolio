@@ -31,6 +31,7 @@ import {
   bootstrap,
   spring,
   infor,
+  frontwalker,
   medify_demo,
   medify1,
   medify2,
@@ -66,6 +67,11 @@ import {
   fasteats18,
 } from "../assets";
 
+export const socialLinks = {
+  github: "https://github.com/pramudithagn",
+  linkedin: "https://www.linkedin.com/in/pramuditha-gunaratne/",
+};
+
 export const navLinks = [
   {
     id: "about",
@@ -83,11 +89,11 @@ export const navLinks = [
 
 const services = [
   {
-    title: "Frontend Development",
+    title: "Full Stack Development",
     icon: web,
   },
   {
-    title: "Backend Development",
+    title: "Artificial Intelligence",
     icon: backend,
   },
   {
@@ -101,100 +107,118 @@ const services = [
 ];
 
 const technologies = [
-  // {
-  //   name: "HTML 5",
-  //   icon: html,
-  // },
-  // {
-  //   name: "CSS 3",
-  //   icon: css,
-  // },
-  {
-    name: "Java",
-    icon: java,
-  },
-  {
-    name: "JavaScript",
-    icon: javascript,
-  },
-  // {
-  //   name: "Python",
-  //   icon: python,
-  // },
-  {
-    name: "Spring",
-    icon: spring,
-  },
-  {
-    name: "React JS",
-    icon: reactjs,
-  },
-  // {
-  //   name: "Redux Toolkit",
-  //   icon: redux,
-  // },
-  // {
-  //   name: "Material UI",
-  //   icon: mui,
-  // },
-  {
-    name: "Node JS",
-    icon: nodejs,
-  },
-  // {
-  //   name: "Express",
-  //   icon: express,
-  // },
-  // {
-  //   name: "SQL",
-  //   icon: sql,
-  // },
-  // {
-  //   name: "MySQL",
-  //   icon: mysql,
-  // },
-  // {
-  //   name: "MongoDB",
-  //   icon: mongodb,
-  // },
-  // {
-  //   name: "Firebase",
-  //   icon: firebase,
-  // },
-  {
-    name: "git",
-    icon: git,
-  },
-  {
-    name: "docker",
-    icon: docker,
-  },
-  {
-    name: "Jenkins",
-    icon: jenkins,
-  },
-  {
-    name: "AWS",
-    icon: aws,
-  },
+  { name: "Java", icon: java },
+  { name: "JavaScript", icon: javascript },
+  { name: "TypeScript", icon: typescript },
+  { name: "Python", icon: python },
+  { name: "Spring", icon: spring },
+  { name: "React JS", icon: reactjs },
+  { name: "Node JS", icon: nodejs },
+  { name: "MongoDB", icon: mongodb },
+  { name: "Git", icon: git },
+  { name: "Docker", icon: docker },
+  { name: "AWS", icon: aws },
 ];
 
 const experiences = [
   {
-    title: "Software Engineer Intern",
+    title: "Associate Software Engineer",
+    company_name: "Frontwalker Sri Lanka",
+    url: "https://frontwalker.com/en",
+    icon: frontwalker,
+    iconBg: "#ffffff",
+    date: "Dec 2024 - Present",
+    projects: [
+      {
+        name: "Foreign Ministry CMS",
+        description:
+          "A centralized multi-tenant digital platform for a Sri Lankan government ministry, unifying the digital presence of 50+ diplomatic missions worldwide.",
+        previewLinks: [
+          { label: "Bucharest Embassy", url: "https://www.emb-bucharest.gov.lk/en" },
+          { label: "Maldives Embassy", url: "https://www.hc-male.gov.lk/en" },
+        ],
+        points: [
+          "Contributed across the entire SDLC covering system design, feature development, performance optimizations, and code refactoring ensuring smooth on-time deliveries.",
+          "Implemented unit tests for multiple backend services and integrated SonarQube code quality gates ensuring high code coverage and reduced code smells.",
+          "Addressed security concerns adhering to OWASP Top 10 recommendations ensuring application reliability.",
+          "Migrated the queue service of a booking system from RabbitMQ to SQS, reducing message processing latency and booking failure incidents.",
+          "Investigated and resolved bugs across frontend and backend services, addressing issues in multi-tenant data isolation and API response consistency.",
+          "Provided L3 support for production issues, diagnosing and resolving critical incidents to ensure platform stability across live diplomatic mission sites.",
+        ],
+        techStack:
+          "TypeScript, React, Next.js, NestJS, PostgreSQL, MongoDB, Redis, Docker, AWS",
+      },
+      {
+        name: "Chatbot",
+        description:
+          "A conversational Generative AI chat assistant platform supporting end-to-end business workflows.",
+        points: [
+          "Spearheaded the implementation of a multi-agent system and RAG pipeline to provide accurate, context-aware responses from custom knowledge bases.",
+          "Optimized prompt engineering strategies and memory systems, reducing hallucination rate and improving response relevance in multi-turn dialogues.",
+          "Integrated safety guardrails and content moderation to ensure responsible AI usage and compliance with ethical guidelines.",
+          "Identified and fixed bugs in the RAG pipeline and dialogue flow, improving context retention and response accuracy across multi-turn conversations.",
+        ],
+        techStack:
+          "Python, Flask, LLM, LangChain, CrewAI, OpenAI, ChromaDB, HuggingFace, Docker",
+      },
+      {
+        name: "Boilerplates",
+        description:
+          "Boilerplate applications with all the basic features built in, customizable for various project needs accordingly.",
+        points: [
+          "Designed and developed a Spring Boot boilerplate single-handedly applying SOLID principles and proper design patterns for a clean, scalable foundation.",
+          "Spearheaded the development of Flutter, NestJS, and React boilerplates, enabling faster project kickoffs across the team.",
+        ],
+        techStack: "Spring Boot, NestJS, React, Flutter, TypeScript, Java, Dart",
+      },
+      {
+        name: "Xavior",
+        description:
+          "A ground–air robotic monitoring platform for safety inspection, integrating a fleet of UGVs and UAVs with real-time AI-powered detections.",
+        points: [
+          "Designed and implemented real-time robot telemetry and sensor data pipelines using Socket.IO enabling live monitoring of robot fleets across inspection sites.",
+          "Implemented live video streaming from robot-mounted cameras using HLS and WebRTC via a streaming server.",
+          "Spearheaded YOLO-based AI detection services for multiple detection scenarios.",
+          "Optimized Dockerfiles of several services resulting in faster build times.",
+          "Debugged and resolved issues in real-time telemetry streams and video pipeline, ensuring stable and uninterrupted robot fleet monitoring.",
+        ],
+        techStack:
+          "React, NestJs, Express.js, MySQL, MongoDB, ROS2, Docker",
+      },
+    ],
+  },
+  {
+    title: "Intern Software Engineer",
     company_name: "Infor",
+    url: "https://www.infor.com/",
     icon: infor,
     iconBg: "#E6DEDD",
-    date: "Sep 2023 - March 2024",
-    points: [
-      "Developed new features and unit tests for one of Infor's flagship products, Infor Nexus.",
-      "Designed & developed a full-stack application to manage the shared devices within a team of 20+ members.",
-      "Got hands-on experience in full software development lifecycle with the application of best practices and proper industry standards.",
-      "Contributed to company inner projects, including an utility object parser tool, which helped with cutting maintenance costs.",
-      "Got familiarized in agile process following agile ceremonies and gained hands-on experience in issue tracking and project management.",
+    date: "Sep 2023 - Mar 2024",
+    projects: [
+      {
+        name: "Infor Nexus",
+        description:
+          "A platform which manages trading partners of Infor's flagship supply chain management product.",
+        link: { label: "View Product", url: "https://www.infor.com/solutions/scm/infor-nexus" },
+        points: [
+          "Developed new features and unit tests for one of Infor's flagship products, Infor Nexus.",
+          "Got hands-on experience in full software development lifecycle with the application of best practices and proper industry standards.",
+          "Contributed to company inner projects, including a utility object parser tool, which helped with cutting maintenance costs.",
+          "Got familiarized in agile process following agile ceremonies and gained hands-on experience in issue tracking and project management.",
+        ],
+        techStack: "Java, Spring Boot, JUnit, GitLab, Docker",
+      },
+      {
+        name: "AppXpress",
+        description:
+          "A device management application to manage commonly used devices across the team.",
+        points: [
+          "Designed and developed the application for a team of 20+ members, leading to reduced device downtime and improved team collaboration.",
+        ],
+        techStack:
+          "JavaScript, React.js, Redux, Express.js, Material-UI, Capacitor, Firebase, Docker",
+      },
     ],
-    techStack:
-      "Java, Javascript, JUnit, React, Node.js, Express, Docker, Firebase",
   },
 ];
 

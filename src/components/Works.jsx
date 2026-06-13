@@ -1,14 +1,34 @@
-import React, { useRef, useState } from "react";
-import { Tilt } from "react-tilt";
-import { motion } from "framer-motion";
+import React, { useRef, useState, useEffect, useCallback } from "react";
+import { motion } from "motion/react";
+import useEmblaCarousel from "embla-carousel-react";
 import { styles } from "../styles";
 import { github } from "../assets";
 import { SectionWrapper } from "../hoc";
 import { projects } from "../constants";
 import { fadeIn, textVariant } from "../utils/motion";
-import Slider from "react-slick";
-import { FaPlay } from "react-icons/fa";
-import ReactPlayer from "react-player";
+import { FaPlay, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+
+const Tilt = ({ className, children, max = 15, scale = 1.05, speed = 400 }) => {
+  const ref = useRef(null);
+  const handleMouseMove = (e) => {
+    const el = ref.current;
+    if (!el) return;
+    const { left, top, width, height } = el.getBoundingClientRect();
+    const x = (e.clientX - left) / width - 0.5;
+    const y = (e.clientY - top) / height - 0.5;
+    el.style.transform = `perspective(1000px) rotateX(${-y * max}deg) rotateY(${x * max}deg) scale(${scale})`;
+    el.style.transition = `transform ${speed}ms ease-out`;
+  };
+  const handleMouseLeave = () => {
+    if (ref.current)
+      ref.current.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+  };
+  return (
+    <div ref={ref} className={className} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
+      {children}
+    </div>
+  );
+};
 
 const ProjectCard = ({
   index,
@@ -19,69 +39,76 @@ const ProjectCard = ({
   source_code_link,
 }) => {
   const [currentSlide, setCurrentSlide] = useState(1);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: media.length > 1 });
 
-  const sliderSettings = {
-    // dots: media.length > 1,
-    infinite: media.length > 1,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: false,
-    autoplaySpeed: 3000,
-    afterChange: (current) => setCurrentSlide(current + 1),
-  };
+  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    emblaApi.on("select", () => {
+      setCurrentSlide(emblaApi.selectedScrollSnap() + 1);
+    });
+  }, [emblaApi]);
 
   return (
     <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
       <Tilt
-        options={{
-          max: 5,
-          scale: 1,
-          speed: 450,
-        }}
+        max={5}
+        scale={1}
+        speed={450}
         className="bg-tertiary p-5 rounded-2xl sm:w-full w-full"
       >
-        {/* Carousel for Project Media */}
         {media.length > 0 ? (
           <div className="relative">
-            {/* Media Slider */}
-            <Slider {...sliderSettings}>
-              {media.map((item, mediaIndex) =>
-                item.type === "video" ? (
-                  <VideoWithPlayButton key={mediaIndex} videoSrc={item.url} />
-                ) : (
-                  // <div key={mediaIndex} className="relative w-full aspect-[16/9]">
-                  //   <ReactPlayer
-                  //     url={item.url}
-                  //     controls
-                  //     width="100%"
-                  //     height="100%"
-                  //     playing={false}
-                  //   />
-                  // </div>
-                  // <div key={mediaIndex} className="relative max-w-[430px] max-h-[240px]">
-                  <div
-                    key={mediaIndex}
-                    className="relative w-full aspect-[16/9]"
-                  >
-                    <img
-                      src={item.url}
-                      alt={`project_media_${mediaIndex}`}
-                      className="w-full h-full object-cover rounded-2xl"
-                    />
-                  </div>
-                )
-              )}
-            </Slider>
+            <div className="overflow-hidden rounded-2xl" ref={emblaRef}>
+              <div className="flex">
+                {media.map((item, mediaIndex) =>
+                  item.type === "video" ? (
+                    <div key={mediaIndex} className="flex-none w-full min-w-0">
+                      <VideoWithPlayButton videoSrc={item.url} />
+                    </div>
+                  ) : (
+                    <div
+                      key={mediaIndex}
+                      className="flex-none w-full min-w-0 relative aspect-video"
+                    >
+                      <img
+                        src={item.url}
+                        alt={`project_media_${mediaIndex}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
 
-            {/* Slide Count Display */}
-            <div className="absolute bottom-2 right-2 bg-black bg-opacity-50 px-2 py-1 rounded text-white text-sm">
+            {media.length > 1 && (
+              <>
+                <button
+                  onClick={scrollPrev}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-200 z-10"
+                  aria-label="Previous slide"
+                >
+                  <FaChevronLeft size={12} />
+                </button>
+                <button
+                  onClick={scrollNext}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-200 z-10"
+                  aria-label="Next slide"
+                >
+                  <FaChevronRight size={12} />
+                </button>
+              </>
+            )}
+
+            <div className="absolute bottom-2 right-2 bg-black/50 px-2 py-1 rounded text-white text-sm">
               {currentSlide}/{media.length}
             </div>
           </div>
         ) : (
-          // <div className="relative w-full h-[230px] bg-gray-200 rounded-2xl flex items-center justify-center">
-          <div className="relative w-full aspect-[16/9] bg-gray-200 rounded-2xl flex items-center justify-center">
+          <div className="relative w-full aspect-video bg-gray-200 rounded-2xl flex items-center justify-center">
             <p>No media available</p>
           </div>
         )}
@@ -90,7 +117,6 @@ const ProjectCard = ({
           <div className="flex items-center justify-between">
             <h3 className="text-white font-bold text-[24px]">{name}</h3>
             <div className="flex items-center justify-between gap-2">
-              {/* <h3 className=" text-secondary font-bold text-[14px]">code:</h3> */}
               <div
                 onClick={() => window.open(source_code_link, "_blank")}
                 className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
@@ -122,7 +148,6 @@ const ProjectCard = ({
   );
 };
 
-// Video Component   + Button
 const VideoWithPlayButton = ({ videoSrc }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef(null);
@@ -134,17 +159,8 @@ const VideoWithPlayButton = ({ videoSrc }) => {
     }
   };
 
-  const handlePause = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-      setIsPlaying(false);
-    }
-  };
-
   return (
-    // <div className="relative w-full h-[230px]">
-    // <div className="relative max-w-[430px] max-h-[240px]">
-    <div className="relative w-full aspect-[16/9]">
+    <div className="relative w-full aspect-video">
       <video
         ref={videoRef}
         className="w-full h-full object-cover rounded-2xl"
@@ -159,7 +175,7 @@ const VideoWithPlayButton = ({ videoSrc }) => {
           className="absolute inset-0 flex justify-center items-center cursor-pointer"
           onClick={handlePlay}
         >
-          <div className="bg-black bg-opacity-50 w-16 h-16 rounded-full flex justify-center items-center">
+          <div className="bg-black/50 w-16 h-16 rounded-full flex justify-center items-center">
             <FaPlay className="text-white text-2xl" />
           </div>
         </div>
@@ -171,7 +187,6 @@ const VideoWithPlayButton = ({ videoSrc }) => {
 const Works = () => {
   return (
     <>
-      {/* Works */}
       <motion.div variants={textVariant()}>
         <p className={`${styles.sectionSubText} `}>My work</p>
         <h2 className={`${styles.sectionHeadText}`}>Projects.</h2>
@@ -190,7 +205,6 @@ const Works = () => {
         </motion.p>
       </div>
 
-      {/* <div className='mt-20 flex flex-wrap gap-7'> */}
       <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 gap-7">
         {projects.map((project, index) => (
           <ProjectCard key={`project-${index}`} index={index} {...project} />

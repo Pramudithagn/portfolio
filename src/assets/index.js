@@ -41,6 +41,7 @@ import shopify from "./company/shopify.png";
 import starbucks from "./company/starbucks.png";
 import tesla from "./company/tesla.png";
 import infor from "./company/infor.png";
+import frontwalker from "./company/frontwalker.png";
 
 import medify_demo from "./medify/medify_demo.mp4";
 import medify1 from "./medify/medify1.png";
@@ -119,6 +120,7 @@ export {
   starbucks,
   tesla,
   infor,
+  frontwalker,
   medify_demo,
   medify1,
   medify2,
