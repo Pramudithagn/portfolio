@@ -7,7 +7,7 @@ import { useInView } from "react-intersection-observer";
 import CanvasLoader from "../Loader";
 
 const Robot = ({ isMobile }) => {
-  const { scene, animations } = useGLTF("./robot/scene.gltf");
+  const { scene, animations } = useGLTF("./robot/scene.glb");
   const [mixer] = useState(() => new THREE.AnimationMixer());
   const ref = useRef();
 
@@ -99,5 +99,7 @@ const RobotCanvas = () => {
     </div>
   );
 };
+
+useGLTF.preload("./robot/scene.glb");
 
 export default RobotCanvas;
