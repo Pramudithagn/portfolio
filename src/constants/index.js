@@ -108,7 +108,7 @@ const technologies = [
 
 const experiences = [
   {
-    title: "Associate Software Engineer",
+    title: "Full Stack Engineer",
     company_name: "Frontwalker Sri Lanka",
     url: "https://frontwalker.com/en",
     icon: frontwalker,
