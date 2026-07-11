@@ -132,7 +132,7 @@ const experiences = [
           "Provided L3 support for production issues, diagnosing and resolving critical incidents to ensure platform stability across live diplomatic mission sites.",
         ],
         techStack:
-          "TypeScript, React, Next.js, NestJS, PostgreSQL, MongoDB, Redis, Docker, AWS",
+          "TypeScript, React, Next.js, SpringBoot, NestJS, PostgreSQL, MongoDB, Redis, Docker, AWS",
       },
       {
         name: "Chatbot",
